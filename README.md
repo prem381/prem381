@@ -1,4 +1,4 @@
-Prem Chand 🚀 | DevOps Engineer | Cloud & Automation Enthusiast
+Prem Chand | DevOps Engineer | Cloud & Automation Enthusiast
 
 🔹 IT Professional with 14+ years of experience in Mac Support & IT Infrastructure, transitioning into DevOps Engineering.
 
@@ -28,4 +28,4 @@ Kubernetes Deployment on AWS
 Ansible Role for Nginx Web Server
 
 
-🚀 Always Learning: Exploring GitOps, Prometheus & Grafana monitoring, and serverless architectures.
+🚀 Planned to Learn: Exploring GitOps, Prometheus & Grafana monitoring, and serverless architectures.
