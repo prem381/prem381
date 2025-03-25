@@ -9,15 +9,23 @@ Prem Chand 🚀 | DevOps Engineer | Cloud & Automation Enthusiast
 💡 What I am capable:
 
 Build and manage CI/CD pipelines with Jenkins & GitHub Actions
+
 Automate infrastructure deployment using Terraform & Ansible
+
 Containerize applications using Docker & Kubernetes
+
 Monitor & optimize cloud-based architectures on AWS
+
 
 📌 GitHub Projects:
 
 CI/CD Pipeline with Jenkins & Docker
+
 AWS Infrastructure Automation with Terraform
+
 Kubernetes Deployment on AWS
+
 Ansible Role for Nginx Web Server
+
 
 🚀 Always Learning: Exploring GitOps, Prometheus & Grafana monitoring, and serverless architectures.
