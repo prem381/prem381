@@ -52,3 +52,16 @@ a:hover {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* Hero Section */
+.hero {
+    background: url('assets/images/profile.png') no-repeat center center/cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
