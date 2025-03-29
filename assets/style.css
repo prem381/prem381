@@ -90,3 +90,12 @@ a:hover {
     top: 30px;
     right: 17px;
 }
+/* Links */
+b {
+    color: #d4001c;
+    text-decoration: none;
+}
+
+b:hover {
+    color: #0037ff;
+}
