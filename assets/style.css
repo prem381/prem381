@@ -84,3 +84,9 @@ a:hover {
     font-weight: bold;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+/* Profile Image Styling */
+.about {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
