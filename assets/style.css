@@ -86,7 +86,7 @@ a:hover {
 }
 /* Profile Image Styling */
 .about {
-    position: static;
+    position: sticky;
     top: 30px;
-    right: 25px;
+    right: 15px;
 }
