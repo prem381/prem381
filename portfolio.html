@@ -87,6 +87,23 @@
   .meta-row{ display:flex; flex-wrap:wrap; gap:18px; font-size:13px; color:var(--text-faint); font-family:'JetBrains Mono',monospace; }
   .meta-row a:hover{ color:var(--accent-teal); }
 
+  .hero-side{ display:flex; flex-direction:column; gap:20px; }
+  .profile-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; display:flex; flex-direction:column; gap:14px; align-items:center; text-align:center;
+  }
+  .profile-image{
+    width:min(100%, 240px); aspect-ratio:1/1; object-fit:cover; border-radius:50%;
+    border:2px solid var(--accent-teal); box-shadow:0 0 0 8px rgba(94,234,212,0.12);
+  }
+  .profile-bio h3{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--accent-teal); margin-bottom:8px;
+  }
+  .profile-bio p{ color:var(--text-dim); font-size:14px; max-width:28ch; }
+  .profile-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+  .profile-actions .btn{ min-width:145px; justify-content:center; }
+
   /* PIPELINE — signature element */
   .pipeline-card{
     background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
@@ -208,7 +225,7 @@
 
 <header class="nav">
   <div class="wrap">
-    <div class="nav-name">PREM<span>.</span>CHAND</div>
+    <div class="nav-name">PREM<span> </span>CHAND</div>
     <nav class="nav-links">
       <a href="#pipeline">Journey</a>
       <a href="#skills">Skills</a>
@@ -240,42 +257,56 @@
       </div>
     </div>
 
-    <div class="pipeline-card">
-      <div class="pipeline-card-head">
-        <span>career_pipeline.log</span>
-        <div class="pipeline-dots"><span></span><span></span><span></span></div>
+    <div class="hero-side">
+      <div class="profile-card">
+        <img class="profile-image" src="Images/prem.jpg" alt="Portrait of Prem Chand">
+        <div class="profile-bio">
+          <h3>Profile snapshot</h3>
+          <p>IT Infrastructure & Systems Engineer with hands-on Mac/MDM, enterprise support, and cloud/DevOps growth.</p>
+        </div>
+        <div class="profile-actions">
+          <a class="btn btn-primary" href="resume.pdf" download="Prem_Chand_Resume.pdf">Download Resume</a>
+          <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">View Resume</a>
+        </div>
       </div>
-      <div class="pipeline-body">
-        <div class="stage done">
-          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
-          <div class="stage-content">
-            <div class="stage-top"><span class="stage-title">BUILD — Apple Device Support</span><span class="stage-years">2010–2022</span></div>
-            <div class="stage-desc">Technical Head, AnyThing Mac (P) Ltd. Led 8+ engineers, ACMT/ACSP-certified.</div>
-            <span class="stage-status">✓ COMPLETE</span>
-          </div>
+
+      <div class="pipeline-card">
+        <div class="pipeline-card-head">
+          <span>career_pipeline.log</span>
+          <div class="pipeline-dots"><span></span><span></span><span></span></div>
         </div>
-        <div class="stage done">
-          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
-          <div class="stage-content">
-            <div class="stage-top"><span class="stage-title">DEPLOY — Enterprise Mac Infra</span><span class="stage-years">2022–Present</span></div>
-            <div class="stage-desc">Technical Assistant, Bennett University. JAMF Pro + Intune at scale, 5,000+ users.</div>
-            <span class="stage-status">✓ RUNNING</span>
+        <div class="pipeline-body">
+          <div class="stage done">
+            <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+            <div class="stage-content">
+              <div class="stage-top"><span class="stage-title">BUILD — Apple Device Support</span><span class="stage-years">2010–2022</span></div>
+              <div class="stage-desc">Technical Head, AnyThing Mac (P) Ltd. Led 8+ engineers, ACMT/ACSP-certified.</div>
+              <span class="stage-status">✓ COMPLETE</span>
+            </div>
           </div>
-        </div>
-        <div class="stage run">
-          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
-          <div class="stage-content">
-            <div class="stage-top"><span class="stage-title">TEST — Cloud & DevOps Upskilling</span><span class="stage-years">2024–Present</span></div>
-            <div class="stage-desc">Intellipaat Advanced Cert. Hands-on: AWS, Terraform, Docker, K8s, Jenkins CI/CD.</div>
-            <span class="stage-status">● IN PROGRESS</span>
+          <div class="stage done">
+            <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+            <div class="stage-content">
+              <div class="stage-top"><span class="stage-title">DEPLOY — Enterprise Mac Infra</span><span class="stage-years">2022–Present</span></div>
+              <div class="stage-desc">Technical Assistant, Bennett University. JAMF Pro + Intune at scale, 5,000+ users.</div>
+              <span class="stage-status">✓ RUNNING</span>
+            </div>
           </div>
-        </div>
-        <div class="stage pending">
-          <div class="stage-marker"><div class="stage-dot"></div></div>
-          <div class="stage-content">
-            <div class="stage-top"><span class="stage-title">RELEASE — Cloud/DevOps Engineer</span><span class="stage-years">Target</span></div>
-            <div class="stage-desc">Systems/Infrastructure or Cloud Support role bridging both worlds.</div>
-            <span class="stage-status">○ PENDING</span>
+          <div class="stage run">
+            <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+            <div class="stage-content">
+              <div class="stage-top"><span class="stage-title">TEST — Cloud & DevOps Upskilling</span><span class="stage-years">2024–Present</span></div>
+              <div class="stage-desc">Intellipaat Advanced Cert. Hands-on: AWS, Terraform, Docker, K8s, Jenkins CI/CD.</div>
+              <span class="stage-status">● IN PROGRESS</span>
+            </div>
+          </div>
+          <div class="stage pending">
+            <div class="stage-marker"><div class="stage-dot"></div></div>
+            <div class="stage-content">
+              <div class="stage-top"><span class="stage-title">RELEASE — Cloud/DevOps Engineer</span><span class="stage-years">Target</span></div>
+              <div class="stage-desc">Systems/Infrastructure or Cloud Support role bridging both worlds.</div>
+              <span class="stage-status">○ PENDING</span>
+            </div>
           </div>
         </div>
       </div>
