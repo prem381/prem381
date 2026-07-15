@@ -84,8 +84,21 @@
   .btn-primary{ background:var(--accent-teal); color:#0a0e13; border-color:var(--accent-teal); font-weight:600; }
   .btn-primary:hover{ background:#83f0dd; }
   .btn-ghost:hover{ border-color:var(--accent-teal); color:var(--accent-teal); }
-  .meta-row{ display:flex; flex-wrap:wrap; gap:18px; font-size:13px; color:var(--text-faint); font-family:'JetBrains Mono',monospace; }
-  .meta-row a:hover{ color:var(--accent-teal); }
+  .contact-shell{ display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+  .contact-card{
+    display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line);
+    border-radius:999px; background:rgba(28,35,46,0.82); min-width:220px;
+    transition:border-color .15s, transform .15s;
+  }
+  .contact-card:hover{ border-color:var(--accent-teal); transform:translateY(-1px); }
+  .contact-icon{
+    width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(94,234,212,0.12); color:var(--accent-teal); border:1px solid rgba(94,234,212,0.22);
+    font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0;
+  }
+  .contact-copy{ display:flex; flex-direction:column; gap:2px; }
+  .contact-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-faint); letter-spacing:0.08em; text-transform:uppercase; }
+  .contact-value{ font-size:13px; color:var(--text); }
 
   .hero-side{ display:flex; flex-direction:column; gap:20px; }
   .profile-card{
@@ -250,10 +263,28 @@
         <a class="btn btn-ghost" href="#projects">View projects</a>
         <a class="btn btn-ghost" href="https://github.com/prem381" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
-      <div class="meta-row">
-        <a href="mailto:premchand381@gmail.com">premchand381@gmail.com</a>
-        <a href="tel:+919212171757">+91 92121 71757</a>
-        <a href="https://linkedin.com/in/prem-chand1" target="_blank" rel="noopener">linkedin.com/in/prem-chand1</a>
+      <div class="contact-shell">
+        <a class="contact-card" href="mailto:premchand381@gmail.com">
+          <span class="contact-icon">✉</span>
+          <span class="contact-copy">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">premchand381@gmail.com</span>
+          </span>
+        </a>
+        <a class="contact-card" href="tel:+919212171757">
+          <span class="contact-icon">☎</span>
+          <span class="contact-copy">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 92121 71757</span>
+          </span>
+        </a>
+        <a class="contact-card" href="https://linkedin.com/in/prem-chand1" target="_blank" rel="noopener">
+          <span class="contact-icon">in</span>
+          <span class="contact-copy">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">prem-chand1</span>
+          </span>
+        </a>
       </div>
     </div>
 
