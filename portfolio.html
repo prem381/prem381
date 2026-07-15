@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem Chand — IT Infrastructure & Cloud/DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10141a;
+    --bg-raised: #171d26;
+    --bg-panel: #1c232e;
+    --line: #2a3341;
+    --text: #e7eaee;
+    --text-dim: #8b96a5;
+    --text-faint: #566072;
+    --accent-silver: #b7c2d0;
+    --accent-teal: #5eead4;
+    --accent-amber: #f5b661;
+    --status-done: #5eead4;
+    --status-run: #f5b661;
+    --status-pending: #566072;
+    --radius: 10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-teal); color:#0a0e13; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+  section{ padding:96px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-teal);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{ content:''; width:20px; height:1px; background:var(--accent-teal); display:inline-block; }
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(16,20,26,0.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header.nav .wrap{ display:flex; justify-content:space-between; align-items:center; height:64px; padding-top:0; padding-bottom:0; }
+  .nav-name{ font-family:'Space Grotesk'; font-weight:700; font-size:16px; }
+  .nav-name span{ color:var(--accent-teal); }
+  .nav-links{ display:flex; gap:28px; font-size:13px; font-family:'JetBrains Mono',monospace; }
+  .nav-links a{ color:var(--text-dim); transition:color .15s; }
+  .nav-links a:hover{ color:var(--accent-teal); }
+  .nav-links a:focus-visible, a:focus-visible{ outline:2px solid var(--accent-teal); outline-offset:3px; }
+  @media (max-width:700px){ .nav-links{ display:none; } }
+
+  /* HERO */
+  .hero{ padding:88px 0 72px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero h1{ font-size:clamp(34px,5vw,54px); line-height:1.05; margin-bottom:18px; }
+  .hero h1 em{ font-style:normal; color:var(--accent-teal); }
+  .hero .role{ font-size:17px; color:var(--text-dim); margin-bottom:26px; max-width:52ch; }
+  .hero .summary{ color:var(--text-dim); max-width:56ch; font-size:15px; margin-bottom:32px; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:34px; }
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:13px; padding:11px 18px;
+    border-radius:6px; border:1px solid var(--line); transition:all .15s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background:var(--accent-teal); color:#0a0e13; border-color:var(--accent-teal); font-weight:600; }
+  .btn-primary:hover{ background:#83f0dd; }
+  .btn-ghost:hover{ border-color:var(--accent-teal); color:var(--accent-teal); }
+  .meta-row{ display:flex; flex-wrap:wrap; gap:18px; font-size:13px; color:var(--text-faint); font-family:'JetBrains Mono',monospace; }
+  .meta-row a:hover{ color:var(--accent-teal); }
+
+  /* PIPELINE — signature element */
+  .pipeline-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .pipeline-card-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-faint);
+  }
+  .pipeline-dots{ display:flex; gap:6px; }
+  .pipeline-dots span{ width:8px; height:8px; border-radius:50%; background:var(--line); }
+  .pipeline-body{ padding:18px; }
+  .stage{ display:flex; gap:14px; padding:12px 0; border-bottom:1px dashed var(--line); }
+  .stage:last-child{ border-bottom:none; }
+  .stage-marker{ display:flex; flex-direction:column; align-items:center; }
+  .stage-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+  .stage-line{ flex:1; width:1px; background:var(--line); margin-top:4px; }
+  .stage.done .stage-dot{ background:var(--status-done); }
+  .stage.run .stage-dot{ background:var(--status-run); box-shadow:0 0 0 3px rgba(245,182,97,0.15); }
+  .stage.pending .stage-dot{ background:var(--status-pending); }
+  .stage-content{ flex:1; }
+  .stage-top{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .stage-title{ font-family:'Space Grotesk'; font-weight:600; font-size:14.5px; }
+  .stage-years{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-faint); white-space:nowrap; }
+  .stage-desc{ font-size:13px; color:var(--text-dim); margin-top:4px; }
+  .stage-status{
+    display:inline-block; margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    padding:3px 8px; border-radius:4px; letter-spacing:0.06em;
+  }
+  .stage.done .stage-status{ background:rgba(94,234,212,0.12); color:var(--status-done); }
+  .stage.run .stage-status{ background:rgba(245,182,97,0.12); color:var(--status-run); }
+  .stage.pending .stage-status{ background:rgba(86,96,114,0.18); color:var(--text-faint); }
+
+  /* SKILLS */
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:24px; margin-top:36px; }
+  .skill-group h3{ font-size:14px; color:var(--accent-silver); margin-bottom:12px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.06em; font-weight:500; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-dim);
+    border:1px solid var(--line); padding:6px 11px; border-radius:5px; background:var(--bg-raised);
+  }
+
+  /* SECTION HEAD */
+  .section-head{ margin-bottom:40px; }
+  .section-head h2{ font-size:30px; }
+  .section-head p{ color:var(--text-dim); margin-top:10px; max-width:60ch; font-size:14.5px; }
+
+  /* CERTS */
+  .cert-cols{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:8px; }
+  @media (max-width:700px){ .cert-cols{ grid-template-columns:1fr; } }
+  .cert-cols h3{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; font-weight:500;}
+  .cert-item{ display:flex; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .cert-item:last-child{ border-bottom:none; }
+  .cert-issuer{ color:var(--text-faint); font-family:'JetBrains Mono',monospace; font-size:12px; white-space:nowrap; }
+  .cert-item.planned{ color:var(--text-dim); }
+  .cert-item.planned .cert-issuer{ color:var(--text-faint); }
+
+  /* EXPERIENCE */
+  .job{ margin-bottom:52px; }
+  .job:last-child{ margin-bottom:0; }
+  .job-head{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:14px; border-bottom:1px solid var(--line); padding-bottom:14px;}
+  .job-title{ font-size:19px; }
+  .job-org{ color:var(--accent-teal); font-size:14px; font-family:'JetBrains Mono',monospace; margin-top:4px; }
+  .job-date{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--text-faint); }
+  .job ul{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .job li{ font-size:14.5px; color:var(--text-dim); position:relative; padding-left:20px; }
+  .job li::before{ content:'▸'; position:absolute; left:0; color:var(--accent-teal); }
+
+  /* PROJECTS */
+  .project-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:36px; }
+  .project-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; display:flex; flex-direction:column; gap:12px; transition:border-color .15s, transform .15s;
+  }
+  .project-card:hover{ border-color:var(--accent-teal); transform:translateY(-2px); }
+  .project-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .project-name{ font-family:'Space Grotesk'; font-weight:600; font-size:16px; }
+  .project-tag{ font-family:'JetBrains Mono',monospace; font-size:10px; padding:3px 8px; border-radius:4px; white-space:nowrap; }
+  .tag-devops{ background:rgba(245,182,97,0.12); color:var(--status-run); }
+  .tag-build{ background:rgba(94,234,212,0.12); color:var(--accent-teal); }
+  .project-desc{ font-size:13.5px; color:var(--text-dim); flex:1; }
+  .project-stack{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-faint); }
+  .project-link{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent-teal); display:inline-flex; align-items:center; gap:6px; margin-top:4px;}
+  .project-link:hover{ text-decoration:underline; }
+  .project-card.add-new{
+    align-items:center; justify-content:center; text-align:center; color:var(--text-faint);
+    border-style:dashed; font-family:'JetBrains Mono',monospace; font-size:12.5px;
+  }
+
+  /* REELS */
+  .reel-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:32px; }
+  .reel-card{
+    aspect-ratio:9/13; background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+    display:flex; flex-direction:column; justify-content:flex-end; padding:16px; position:relative; overflow:hidden;
+    background:linear-gradient(160deg, #1c232e, #131820);
+  }
+  .reel-card::before{
+    content:'▶'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-size:22px; color:var(--text-faint); opacity:.5;
+  }
+  .reel-tool{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent-teal); position:relative; z-index:1; }
+  .reel-title{ font-size:13px; margin-top:4px; position:relative; z-index:1; }
+  .tool-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+
+  /* FOOTER */
+  footer{ padding:64px 0 48px; }
+  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; align-items:flex-end; }
+  .footer-title{ font-size:26px; max-width:20ch; }
+  .footer-links{ display:flex; gap:22px; font-family:'JetBrains Mono',monospace; font-size:13px; flex-wrap:wrap; }
+  .footer-links a{ color:var(--text-dim); }
+  .footer-links a:hover{ color:var(--accent-teal); }
+  .footer-bottom{ margin-top:48px; padding-top:20px; border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--text-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-name">PREM<span>.</span>CHAND</div>
+    <nav class="nav-links">
+      <a href="#pipeline">Journey</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#reels">Editing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Faridabad, India</div>
+      <h1>Sixteen years keeping <em>systems</em> running. Now shipping them.</h1>
+      <p class="role">IT Infrastructure & Systems Engineer — Mac/MDM Expert — Cloud & DevOps Practitioner</p>
+      <p class="summary">I've spent a career on the front line of enterprise IT: diagnosing hardware, deploying fleets of Mac devices, and keeping 5,000+ users online at Bennett University. I'm now building on that operational foundation with AWS, Terraform, Docker, Kubernetes, and Jenkins CI/CD — bridging deep infrastructure experience with modern cloud automation.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:premchand381@gmail.com">Get in touch</a>
+        <a class="btn btn-ghost" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="https://github.com/prem381" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <div class="meta-row">
+        <a href="mailto:premchand381@gmail.com">premchand381@gmail.com</a>
+        <a href="tel:+919212171757">+91 92121 71757</a>
+        <a href="https://linkedin.com/in/prem-chand1" target="_blank" rel="noopener">linkedin.com/in/prem-chand1</a>
+      </div>
+    </div>
+
+    <div class="pipeline-card">
+      <div class="pipeline-card-head">
+        <span>career_pipeline.log</span>
+        <div class="pipeline-dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="pipeline-body">
+        <div class="stage done">
+          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+          <div class="stage-content">
+            <div class="stage-top"><span class="stage-title">BUILD — Apple Device Support</span><span class="stage-years">2010–2022</span></div>
+            <div class="stage-desc">Technical Head, AnyThing Mac (P) Ltd. Led 8+ engineers, ACMT/ACSP-certified.</div>
+            <span class="stage-status">✓ COMPLETE</span>
+          </div>
+        </div>
+        <div class="stage done">
+          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+          <div class="stage-content">
+            <div class="stage-top"><span class="stage-title">DEPLOY — Enterprise Mac Infra</span><span class="stage-years">2022–Present</span></div>
+            <div class="stage-desc">Technical Assistant, Bennett University. JAMF Pro + Intune at scale, 5,000+ users.</div>
+            <span class="stage-status">✓ RUNNING</span>
+          </div>
+        </div>
+        <div class="stage run">
+          <div class="stage-marker"><div class="stage-dot"></div><div class="stage-line"></div></div>
+          <div class="stage-content">
+            <div class="stage-top"><span class="stage-title">TEST — Cloud & DevOps Upskilling</span><span class="stage-years">2024–Present</span></div>
+            <div class="stage-desc">Intellipaat Advanced Cert. Hands-on: AWS, Terraform, Docker, K8s, Jenkins CI/CD.</div>
+            <span class="stage-status">● IN PROGRESS</span>
+          </div>
+        </div>
+        <div class="stage pending">
+          <div class="stage-marker"><div class="stage-dot"></div></div>
+          <div class="stage-content">
+            <div class="stage-top"><span class="stage-title">RELEASE — Cloud/DevOps Engineer</span><span class="stage-years">Target</span></div>
+            <div class="stage-desc">Systems/Infrastructure or Cloud Support role bridging both worlds.</div>
+            <span class="stage-status">○ PENDING</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Core Competencies</div>
+      <h2>What I actually work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Cloud & IaC</h3>
+        <div class="chip-row">
+          <span class="chip">AWS EC2</span><span class="chip">IAM</span><span class="chip">VPC</span>
+          <span class="chip">RDS</span><span class="chip">Lambda</span><span class="chip">Fargate</span>
+          <span class="chip">S3</span><span class="chip">CloudFront</span><span class="chip">CloudWatch</span>
+          <span class="chip">Terraform</span><span class="chip">CloudFormation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>CI/CD & Automation</h3>
+        <div class="chip-row">
+          <span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">Ansible</span>
+          <span class="chip">Bash</span><span class="chip">Python</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Containers & Orchestration</h3>
+        <div class="chip-row">
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS Fargate</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Operating Systems</h3>
+        <div class="chip-row">
+          <span class="chip">macOS (ACMT)</span><span class="chip">Linux Admin</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Version Control</h3>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Branching Strategy</span><span class="chip">Webhooks</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>IT Leadership</h3>
+        <div class="chip-row">
+          <span class="chip">Team Leadership</span><span class="chip">SLA Ownership</span>
+          <span class="chip">Escalation Mgmt</span><span class="chip">Mentoring</span><span class="chip">ITSM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="pipeline-certs">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Certifications</div>
+      <h2>Earned, and what's next</h2>
+    </div>
+    <div class="cert-cols">
+      <div>
+        <h3>Earned</h3>
+        <div class="cert-item"><span>Advanced Certification in Cloud Computing & DevOps</span><span class="cert-issuer">Intellipaat</span></div>
+        <div class="cert-item"><span>ACMT — Apple Certified Mac Technician</span><span class="cert-issuer">Apple</span></div>
+        <div class="cert-item"><span>ACSP — Apple Certified Support Professional</span><span class="cert-issuer">Apple</span></div>
+        <div class="cert-item"><span>ACIT — Apple Certified iOS Technician</span><span class="cert-issuer">Apple</span></div>
+        <div class="cert-item"><span>JAMF 100 — Certified Associate</span><span class="cert-issuer">Jamf</span></div>
+        <div class="cert-item"><span>JCHNP — Certified Hardware & Networking Professional</span><span class="cert-issuer">Jetking</span></div>
+      </div>
+      <div>
+        <h3>In Progress / Planned</h3>
+        <div class="cert-item planned"><span>AWS Certified Solutions Architect — Associate</span><span class="cert-issuer">In preparation</span></div>
+        <div class="cert-item planned"><span>M.A.</span><span class="cert-issuer">IGNOU</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Professional Experience</div>
+      <h2>Where I've built this</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div>
+          <div class="job-title">Technical Assistant — Mac Labs & IT Infrastructure</div>
+          <div class="job-org">Bennett University</div>
+        </div>
+        <div class="job-date">March 2022 — Present</div>
+      </div>
+      <ul>
+        <li>Administer and maintain multiple Mac and Windows computer labs serving 5,000+ faculty and students across campus.</li>
+        <li>Deploy and manage Apple devices at scale using JAMF Pro and Microsoft Intune — enrolment, policy configuration, and app distribution via Apple Business Manager.</li>
+        <li>Automated system configuration, patch management, and software deployment using Bash scripting, reducing manual effort significantly.</li>
+        <li>Implement and enforce IT security policies, backup strategies, and network access controls across lab infrastructure.</li>
+        <li>Primary escalation point for complex hardware and software issues; manage vendor relationships and hardware asset lifecycle.</li>
+        <li>Mentored junior IT staff and produced SOPs and knowledge-base documentation adopted across the IT department.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div>
+          <div class="job-title">Technical Head — Apple Device Support</div>
+          <div class="job-org">AnyThing Mac (P) Ltd — Apple Authorised Service Center</div>
+        </div>
+        <div class="job-date">March 2010 — July 2022</div>
+      </div>
+      <ul>
+        <li>Led a team of 8+ service engineers delivering Apple device diagnostics, repairs, and customer support to enterprise and individual clients.</li>
+        <li>Maintained Apple-certified service standards as an ACMT/ACSP-certified technician; achieved consistently high customer satisfaction scores.</li>
+        <li>Conducted structured technical training for new engineers on Apple hardware repair, software troubleshooting, and service workflows.</li>
+        <li>Streamlined workshop IT infrastructure and introduced automation to reduce average device turnaround time.</li>
+        <li>Handled enterprise client accounts, SLA negotiations, and escalation resolution for institutional customers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projects</div>
+      <h2>DevOps builds & personal engineering</h2>
+      <p>This grid is generated from a single list in the page's source — adding a new project after this file goes live means editing one object, not rebuilding a layout.</p>
+    </div>
+    <div class="project-grid" id="project-grid"></div>
+  </div>
+</section>
+
+<!-- REELS -->
+<section id="reels">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Also — I edit video</div>
+      <h2>Behind the camera</h2>
+      <p>Alongside infrastructure work, I shoot and edit video for social platforms using Final Cut Pro, Premiere Pro, and DaVinci Resolve.</p>
+    </div>
+    <div class="tool-row">
+      <span class="chip">Final Cut Pro</span><span class="chip">Premiere Pro</span><span class="chip">DaVinci Resolve</span>
+    </div>
+    <div class="reel-grid">
+      <a class="reel-card" href="#" target="_blank" rel="noopener">
+        <span class="reel-tool">Final Cut Pro</span>
+        <span class="reel-title">Reel title — add link</span>
+      </a>
+      <a class="reel-card" href="#" target="_blank" rel="noopener">
+        <span class="reel-tool">Premiere Pro</span>
+        <span class="reel-title">Reel title — add link</span>
+      </a>
+      <a class="reel-card" href="#" target="_blank" rel="noopener">
+        <span class="reel-tool">DaVinci Resolve</span>
+        <span class="reel-title">Reel title — add link</span>
+      </a>
+      <a class="reel-card" href="#" target="_blank" rel="noopener">
+        <span class="reel-tool">Premiere Pro</span>
+        <span class="reel-title">Reel title — add link</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="eyebrow">Open to work</div>
+        <div class="footer-title">Systems/Infrastructure Engineer or Cloud Support roles.</div>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:premchand381@gmail.com">Email</a>
+        <a href="tel:+919212171757">Phone</a>
+        <a href="https://linkedin.com/in/prem-chand1" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/prem381" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Faridabad, India</span>
+      <span>Prem Chand — built with plain HTML/CSS/JS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── EDIT THIS LIST ONLY when you ship a new project ──
+  // category: "devops" (cloud/infra builds) or "build" (personal software projects)
+  const PROJECTS = [
+    {
+      name: "CI/CD Pipeline — Jenkins, Docker & AWS EC2",
+      category: "devops",
+      desc: "End-to-end Jenkins pipeline (build → test → deploy) triggered by GitHub webhooks on every commit. Containerised with Docker, deployed to EC2 — cut deployment time by ~70% with parameterised, zero-downtime rollback stages.",
+      stack: "Jenkins · Docker · AWS EC2 · GitHub Webhooks",
+      link: "#"
+    },
+    {
+      name: "AWS Infrastructure Automation",
+      category: "devops",
+      desc: "Production-grade VPC with public/private subnets, NAT gateway, security groups, and route tables via Terraform modules. Remote state in S3 + DynamoDB lock, with CloudWatch dashboards and SNS alerting.",
+      stack: "Terraform · AWS VPC/EC2/RDS/S3 · CloudWatch · SNS",
+      link: "#"
+    },
+    {
+      name: "LYNC",
+      category: "build",
+      desc: "LAN chat desktop app with peer discovery, file transfer, and WebRTC audio/video calls — built and debugged end-to-end, including UDP discovery and connection-state handling.",
+      stack: "Electron · React · Node.js · WebRTC",
+      link: "https://github.com/prem381"
+    },
+    {
+      name: "Business Manager — Jagarnath Kumar",
+      category: "build",
+      desc: "Local-business management SPA covering employees, clients, GST-compliant billing/invoicing, and salary calculation, with PDF invoice generation.",
+      stack: "React · Vite · html2pdf.js",
+      link: "https://github.com/prem381"
+    }
+  ];
+
+  const grid = document.getElementById('project-grid');
+  const tagLabel = { devops: 'CLOUD/DEVOPS', build: 'PERSONAL BUILD' };
+  const tagClass = { devops: 'tag-devops', build: 'tag-build' };
+
+  PROJECTS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <div class="project-top">
+        <span class="project-name">${p.name}</span>
+        <span class="project-tag ${tagClass[p.category]}">${tagLabel[p.category]}</span>
+      </div>
+      <p class="project-desc">${p.desc}</p>
+      <span class="project-stack">${p.stack}</span>
+      <a class="project-link" href="${p.link}" target="_blank" rel="noopener">View repo ↗</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  const addCard = document.createElement('div');
+  addCard.className = 'project-card add-new';
+  addCard.innerHTML = 'Next project ships here — add it to the PROJECTS list in the &lt;script&gt; tag';
+  grid.appendChild(addCard);
+</script>
+
+</body>
+</html>
